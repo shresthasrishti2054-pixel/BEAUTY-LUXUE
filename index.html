@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Beauty Nepal | Premium Skincare & Makeup</title>
+    <style>
+        /* Design Tokens & Theme Configuration */
+        :root {
+            --primary: #946e5b;      /* Warm clay / terracotta accent */
+            --primary-light: #fdf8f5;/* Ultra soft background cream */
+            --accent: #f3e5de;       /* Soft warm blush tint */
+            --dark: #2b2321;         /* Deep espresso text contrast */
+            --body-text: #594e4a;    /* Muted secondary body copy */
+            --white: #ffffff;
+            --success: #6e846e;      /* Subtle organic green for badges */
+            --shadow: rgba(148, 110, 91, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--dark);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Announcement Bar */
+        .announcement-bar {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 6px 5%;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Navigation Bar */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--accent);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Split Banner */
+        .hero {
+            background-color: var(--primary-light);
+            padding: 4rem 5% 6rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .hero-text .tagline {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+            line-height: 1.15;
+            font-weight: 600;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: var(--body-text);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.9rem 2.2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--primary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark);
+            border: 1px solid var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--dark);
+            color: var(--white);
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 320px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 20px 20px 0px var(--accent);
+        }
+
+        /* Business Perks Block */
+        .perks-bar {
+            background-color: var(--white);
+            padding: 2.5rem 5%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .perk-item {
+            text-align: center;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .perk-item h4 {
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .perk-item p {
+            font-size: 0.85rem;
+            color: var(--body-text);
+        }
+
+        /* General Section Layout */
+        .shop-container {
+            padding: 5rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .section-header p {
+            color: var(--body-text);
+            font-size: 1rem;
+        }
+
+        /* Product Cards Grid structural rules */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 35px;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .image-container {
+            position: relative;
+            background-color: var(--primary-light);
+            height: 320px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.04);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: var(--success);
+            color: var(--white);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-makeup {
+            background-color: var(--primary);
+        }
+
+        .product-info {
+            padding: 1rem 0;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .product-info h3 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .price {
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+        }
+
+        /* Formatted Order Action Button */
+        .btn-buy {
+            width: 100%;
+            text-align: center;
+            padding: 0.65rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: transparent;
+            color: var(--dark);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-buy:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            color: var(--white);
+        }
+
+        /* Localization & Trust Section */
+        .order-notice {
+            background-color: var(--primary-light);
+            border: 1px dashed var(--primary);
+            border-radius: 6px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 2rem auto;
+        }
+
+        .order-notice h4 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        .payment-tags {
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        /* Footer Custom Framework */
+        footer {
+            background-color: var(--dark);
+            color: #bfaea7;
+            padding: 4rem 5% 2rem 5%;
+            font-size: 0.9rem;
+            border-top: 4px solid var(--primary);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.05rem;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p {
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+        }
+
+        .footer-col a {
+            color: #bfaea7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #423633;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Viewport Optimizations */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 1rem 5%;
+            }
+            nav a {
+                margin: 0 10px;
+                font-size: 0.8rem;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 5%;
+            }
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+            .hero-image img {
+                height: 350px;
+                box-shadow: 12px 12px 0px var(--accent);
+            }
+            .shop-container {
+                padding: 3rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar for Local Store Updates -->
+    <div class="announcement-bar">
+        ✨ FREE SHIPPING INSIDE KATHMANDU VALLEY ON ORDERS OVER RS. 2,500! ✨
+    </div>
+
+    <!-- Header Navigation Platform -->
+    <header>
+        <div class="logo">Aura<span>Nepal</span></div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#skincare">Skincare</a>
+            <a href="#makeup">Makeup</a>
+            <a href="#how-to-order">How to Order</a>
+        </nav>
+    </header>
+
+    <!-- Main Hero Landing Split -->
+    <section class="hero">
+        <div class="hero-text">
+            <span class="tagline">Clean Beauty Ecosystem</span>
+            <h1>Your Skin's New <br>Daily Ritual.</h1>
+            <p>Consciously curated skincare solutions and high-performance makeup designed intentionally to thrive in Nepal’s unique climate environments.</p>
+            <div class="btn-group">
+                <a href="#skincare" class="btn">Explore Skincare</a>
+                <a href="#makeup" class="btn btn-secondary">Explore Makeup</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Premium universally accessible lifestyle placeholder photo -->
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" alt="Minimal beauty flatlay representing skincare and clean makeup">
+        </div>
+    </section>
+
+    <!-- Value Perks Bar for Local Delivery Confidence -->
+    <section class="perks-bar">
+        <div class="perk-item">
+            <h4>🏍️ Nationwide Delivery</h4>
+            <p>1-2 Days Kathmandu | 3-5 Days Out-of-Valley</p>
+        </div>
+        <div class="perk-item">
+            <h4>🌱 Clean & Certified</h4>
+            <p>100% authentic, curated fresh products</p>
+        </div>
+        <div class="perk-item">
+            <h4>🤝 Cash On Delivery available</h4>
+            <p>Pay securely at your doorstep anywhere in Nepal</p>
+        </div>
+    </section>
+
+    <!-- Skincare Catalog Showcase Block -->
+    <section class="shop-container" id="skincare">
+        <div class="section-header">
+            <div class="product-category">Botanical Solutions</div>
+            <h2>Advanced Skincare</h2>
+            <p>Deep hydration, barrier repair, and pollution protection formulas tailored for radiant skin.</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product Item 1 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="badge">Best Seller</span>
+                    <img src="https://images.unsplash.com/photo-1608248597481-496100c8c836?auto=format&fit=crop&w=400&q=80" alt="Vitamin C Barrier Serum" class="product-img">
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Serums</p>
+                    <h3>Glow-Enhancing Vitamin C Serum</h3>
+                    <p class="price">Rs. 1,650</p>
+                    <a href="https://wa.me/9779800000000?text=Hi,%20I%20want%20to%20order%20the%20Vitamin%20C%20Serum" class="btn btn-buy">Order via WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Product Item 2 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=400&q=80" alt="Ceramide Barrier Cream Moisturizer" class="product-img">
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Moisturizers</p>
+                    <h3>Ceramide Barrier Repair Cream</h3>
+                    <p class="price">Rs. 1,400</p>
+                    <a href="#" class="btn btn-buy">Order via WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Product Item 3 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="badge">Hydration Plus</span>
+                    <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=400&q=80" alt="Sunscreen Gel Cream Protection" class="product-img">
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Sun Protection</p>
+                    <h3>Matte Finish Gel Sunscreen SPF 50+</h3>
+                    <p class="price">Rs. 1,150</p>
+                    <a href="#" class="btn btn-buy">Order via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Makeup Catalog Showcase Block -->
+    <section class="shop-container" id="makeup" style="background-color: #faf6f4; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent);">
+        <div class="section-header">
+            <div class="product-category">Flawless Enhancements</div>
+            <h2>Weightless Makeup</h2>
+            <p>Breathable formulas, high pigment yields, and sweat-resistant options perfect for all-day wear.</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product Item 4 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="badge badge-makeup">Trending</span>
+                    <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=400&q=80" alt="Velvet Matte Liquid Lipstick Tint" class="product-img">
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Lips</p>
+                    <h3>Velvet Matte Liquid Lip Cushion</h3>
+                    <p class="price">Rs. 950</p>
+                    <a href="#" class="btn btn-buy">Order via WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Product Item 5 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1631730359575-38e4755d772b?auto=format&fit=crop&w=400&q=80" alt="Dewy Lightweight Foundation Tint" class="product-img">
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Face Base</p>
+                    <h3>Dewy Skin Tint Foundation</h3>
+                    <p class="price">Rs. 1,850</p>
+                    <a href="#" class="btn btn-buy">Order via WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Product Item 6 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="badge badge-makeup">New Drop</span>
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80" alt="Hydrating Liquid Cheek Blush" class="product-img">
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Cheeks</p>
+                    <h3>Liquid Serum Blush (3 Adaptable Shades)</h3>
+                    <p class="price">Rs. 1,250</p>
+                    <a href="#" class="btn btn-buy">Order via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order & Simple Local Payment Notice Framework -->
+    <section class="shop-container" id="how-to-order">
+        <div class="order-notice">
+            <h4>🛍️ How to Place Your Order Easily</h4>
+            <p>Since we are growing our digital footprint, the fastest way to get your items is to click the <strong>"Order via WhatsApp"</strong> button above, or DM us directly on Instagram/TikTok with a screenshot of your favorite picks!</p>
+            <div class="payment-tags">
+                ACCEPTED TRANSACTIONS: eSewa | Khalti | Fonepay Transfer | Cash on Delivery (COD)
+            </div>
+        </div>
+    </section>
+
+    <!-- Structural Global Brand Footer Container -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color: var(--white); margin-bottom:1rem;">Aura<span>Nepal</span></div>
+                <p>Bringing intentionally designed, skin-loving solutions straight to beauty enthusiasts across Nepal.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Nav</h4>
+                <a href="#skincare">Skincare Lines</a>
+                <a href="#makeup">Makeup Lines</a>
+                <a href="#how-to-order">Ordering Guide</a>
+            </div>
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <p>📍 New Baneshwor, Kathmandu, Nepal</p>
+                <p>📞 Support Line: +977-1-4XXXXXX</p>
+                <p>✉️ Mail: hello@aurabeautynepal.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Beauty Nepal. Designed with clean minimal aesthetic modules. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
